@@ -6,6 +6,8 @@ use std::error::Error;
 mod tests {
     use super::*;
 
+    // Tests case sensitive behavior of the program using the 'search' method.
+    //
     #[test]
     fn case_sensitive() {
         let query = "duct";
@@ -18,6 +20,9 @@ Duct tape.";
         assert_eq!(vec!["safe, fast, productive."], search(query, contents));
     }
 
+    // Tesets case insensitive behavior of the program implemented in the
+    // 'search_case_insensitive' method.
+    //
     #[test]
     fn case_insensitive() {
         let query = "rUsT";
@@ -33,7 +38,6 @@ Trust me.";
 
 }
 
-
 pub struct Config {
     pub query: String,
     pub filename: String,
@@ -41,6 +45,8 @@ pub struct Config {
 } // no semicolon after struct definition
 
 impl Config {
+
+
     pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
         args.next();
 
@@ -94,6 +100,7 @@ pub fn search<'a>(query: &str, contents:&'a str) -> Vec<&'a str> {
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents:&'a str) -> Vec<&'a str> {
+
     //let query = query.to_lowercase();
     //let mut results = Vec::new();
     //
@@ -104,6 +111,11 @@ pub fn search_case_insensitive<'a>(query: &str, contents:&'a str) -> Vec<&'a str
     //}
     //
     //results
+
+    // The iterator-based piece of code below evaluates to the same thing as the
+    // loop-based approach above. This is the preferred way to implement such
+    // behavior by Rust programmers. It turns out that they're nearly the same
+    // performance-wise, with the iterator-based solution being slightly faster.
     contents
         .lines()
         .filter(|line| line.contains(query))
