@@ -45,8 +45,6 @@ pub struct Config {
 } // no semicolon after struct definition
 
 impl Config {
-
-
     pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
         args.next();
 
@@ -100,7 +98,6 @@ pub fn search<'a>(query: &str, contents:&'a str) -> Vec<&'a str> {
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents:&'a str) -> Vec<&'a str> {
-
     //let query = query.to_lowercase();
     //let mut results = Vec::new();
     //
